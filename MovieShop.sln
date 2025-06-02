@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieShop.Core", "MovieShop
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieShop.Infra", "MovieShop.Infra\MovieShop.Infra.csproj", "{C87D1FE5-949A-4838-A827-659DFCDC642C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieShop.Services", "MovieShop.Services\MovieShop.Services.csproj", "{0818EC02-4340-46CB-83F3-68EADD8BE54B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{C87D1FE5-949A-4838-A827-659DFCDC642C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C87D1FE5-949A-4838-A827-659DFCDC642C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C87D1FE5-949A-4838-A827-659DFCDC642C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0818EC02-4340-46CB-83F3-68EADD8BE54B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0818EC02-4340-46CB-83F3-68EADD8BE54B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0818EC02-4340-46CB-83F3-68EADD8BE54B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0818EC02-4340-46CB-83F3-68EADD8BE54B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

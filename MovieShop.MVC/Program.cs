@@ -1,7 +1,13 @@
+using MovieShop.Infra.Data;
+using MovieShop.MVC.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.AddOptions();
+builder.Services.AddDatabase();
 
 var app = builder.Build();
 
