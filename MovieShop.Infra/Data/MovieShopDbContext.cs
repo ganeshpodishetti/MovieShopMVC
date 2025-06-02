@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using MovieShop.Core.Entities;
@@ -5,11 +6,20 @@ using MovieShop.Core.Entities;
 namespace MovieShop.Infra.Data;
 
 public class MovieShopDbContext(DbContextOptions<MovieShopDbContext> options)
-    : IdentityDbContext(options)
+    : IdentityDbContext<User, // TUser
+        Role, // TRole
+        int, // TKey - primary key type
+        IdentityUserClaim<int>,
+        IdentityUserRole<int>,
+        IdentityUserLogin<int>,
+        IdentityRoleClaim<int>,
+        IdentityUserToken<int>>(options)
 {
     public DbSet<Movie> Movies { get; set; }
     public DbSet<Genre> Genres { get; set; }
+
     public DbSet<Cast> Casts { get; set; }
+
     //public DbSet<User> Users { get; set; }
     //public DbSet<Role> Roles { get; set; }
     public DbSet<Favorite> Favorites { get; set; }
