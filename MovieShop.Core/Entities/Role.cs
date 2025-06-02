@@ -1,9 +1,16 @@
+using Microsoft.AspNetCore.Identity;
+
 namespace MovieShop.Core.Entities;
 
-public class Role : Base
+public class Role : IdentityRole<int>
 {
-     public required string Name { get; set; }
+    // Default constructor required by EF Core
+    public Role()
+    {
+    }
 
-     // Navigation Properties
-     public ICollection<UserRole> UserRoles { get; set; }
+    // Constructor with name parameter
+    public Role(string roleName) : base(roleName)
+    {
+    }
 }

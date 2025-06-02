@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace MovieShop.Core.Entities;
 
-public class User : IdentityUser
+public class User : IdentityUser<int>
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }
@@ -12,6 +12,7 @@ public class User : IdentityUser
 
     public ICollection<Favorite> Favorites { get; set; }
     public ICollection<Review> Reviews { get; set; }
+
     public ICollection<Purchase> Purchases { get; set; }
-    public ICollection<UserRole> UserRoles { get; set; }
+    // public ICollection<UserRole> UserRoles { get; set; }
 }
