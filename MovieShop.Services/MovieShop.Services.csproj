@@ -7,7 +7,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\MovieShop.Infra\MovieShop.Infra.csproj" />
+        <ProjectReference Include="..\MovieShop.Infra\MovieShop.Infra.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Contracts\Repositories\"/>
     </ItemGroup>
 
 </Project>

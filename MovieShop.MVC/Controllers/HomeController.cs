@@ -1,21 +1,16 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using MovieShop.MVC.Models;
+using MovieShop.Services.Contracts.Services;
 
 namespace MovieShop.MVC.Controllers;
 
-public class HomeController : Controller
+public class HomeController(IMovieService movieService) : Controller
 {
-    private readonly ILogger<HomeController> _logger;
-
-    public HomeController(ILogger<HomeController> logger)
-    {
-        _logger = logger;
-    }
-
     public IActionResult Index()
     {
-        return View();
+        var movies = movieService.GetTop20MoviesAsync();
+        return View(movies);
     }
 
     public IActionResult Privacy()
