@@ -9,6 +9,7 @@ builder.Services.AddControllersWithViews();
 builder.AddOptions();
 builder.Services.AddDatabase();
 builder.AddAuthentication();
+builder.Services.AddServices();
 
 var app = builder.Build();
 
