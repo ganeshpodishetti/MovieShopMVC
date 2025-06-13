@@ -1,7 +1,7 @@
 @model MovieShop.Services.Dtos.Movie.MovieCardDto
 
 <div class="col-xl-2 col-lg-3 col-md-4 col-6 mb-4">
-    <a asp-controller="Movies" asp-action="MovieDetails" asp-route-id="@Model.Id">
+    <a asp-controller="Movie" asp-action="MovieDetails" asp-route-id="@Model.Id">
         <img src="@Model.PosterURL" alt="@Model.Title" class="img-fluid"/>
     </a>
 </div>
