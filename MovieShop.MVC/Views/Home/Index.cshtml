@@ -1,34 +1,80 @@
-@model IEnumerable<MovieShop.Services.Dtos.Movie.MovieCardDto>
+@model IEnumerable<MovieCardDto>
 
 @{
-    Layout = null;
+    ViewData["Title"] = "Home";
 }
 
-<!DOCTYPE html>
-
-<html lang="en">
-<head>
-    <title>Movie Page</title>
-</head>
-<body>
-<div>
-    <h1>Welcome to the Movie Shop</h1>
-    <p>This is a placeholder for the home page content.</p>
-
-    <div class="rounded">
-        <div class="container-fluid">
-            <div class="row">
-                @foreach (var movie in Model)
-                {
-                    <partial name="_MovieCard" model="movie"/>
-                }
-            </div>
-        </div>
+<!-- Hero Section -->
+<section class="relative bg-primary py-16 md:py-24">
+    <!-- Background pattern -->
+    <div class="absolute inset-0 opacity-10">
+        <div class="absolute inset-0"
+             style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'white\' fill-opacity=\'1\' fill-rule=\'evenodd\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/svg%3E');"></div>
     </div>
 
-    <footer>
-        <p>&copy; 2023 Movie Shop</p>
-    </footer>
-</div>
-</body>
-</html>
+    <div class="container mx-auto px-4 relative z-10">
+        <div class="text-center text-white">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Welcome to Movie Shop</h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto opacity-90">Discover the latest and greatest movies all
+                in one place</p>
+            <a href="#featured-movies"
+               class="inline-block bg-secondary hover:bg-secondary-light text-white font-medium px-8 py-3 rounded-full transition duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                Explore Movies
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Top Movies Section -->
+<section id="featured-movies" class="container mx-auto px-4 py-16">
+    <h2 class="text-3xl font-bold mb-8 text-primary relative inline-block">
+        Top Movies
+        <span class="absolute bottom-0 left-0 w-1/2 h-1 bg-secondary"></span>
+    </h2>
+
+    @if (Model.Any())
+    {
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+            @foreach (var movie in Model)
+            {
+                <div
+                    class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1 flex flex-col h-full">
+                    <div class="relative overflow-hidden">
+                        <img
+                            src="@(string.IsNullOrEmpty(movie.PosterURL) ? "/images/default-movie.png" : movie.PosterURL)"
+                            alt="@movie.Title"
+                            class="w-full h-auto object-cover transition duration-300 hover:scale-105">
+                    </div>
+                    <div class="p-4 flex flex-col flex-grow">
+                        <h3 class="font-semibold text-gray-800 mb-2 line-clamp-1">@movie.Title</h3>
+                        @* <div class="mb-2"> *@
+                        @*     <span class="inline-block px-2 py-1 text-xs text-white font-semibold bg-primary rounded"> *@
+                        @*         @movie.Rating *@
+                        @*     </span> *@
+                        @* </div> *@
+                        @* <p class="text-sm text-gray-500 mt-auto">@movie.ReleaseDate.ToString("MMM dd, yyyy")</p> *@
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-4">
+            <p class="text-blue-700">No movies available at the moment. Please check back later.</p>
+        </div>
+    }
+</section>
+
+<!-- CTA Section -->
+<section class="bg-secondary py-16">
+    <div class="container mx-auto px-4 text-center">
+        <h2 class="text-3xl font-bold text-white mb-6">Ready to discover your next favorite movie?</h2>
+        <p class="text-white opacity-90 mb-8 max-w-2xl mx-auto">Join thousands of movie enthusiasts who trust MovieShop
+            for their cinema needs.</p>
+        <a href="#"
+           class="inline-block bg-white text-secondary hover:bg-gray-100 font-medium px-8 py-3 rounded-full transition duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+            Browse All Movies
+        </a>
+    </div>
+</section>
