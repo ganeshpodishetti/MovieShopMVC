@@ -13,15 +13,15 @@ public static class DatabaseExtension
         {
             var connectionString = provider.GetRequiredService<IOptions<ConnectionString>>().Value.MovieShopDb;
 
-            if(string.IsNullOrEmpty(connectionString))
+            if (string.IsNullOrEmpty(connectionString))
                 throw new Exception("Connection string is not set");
 
             options.UseSqlServer(connectionString, sqlServerOptions =>
             {
-                sqlServerOptions.EnableRetryOnFailure(maxRetryCount: 5, maxRetryDelay: TimeSpan.FromSeconds(30), errorNumbersToAdd: null);
+                sqlServerOptions.EnableRetryOnFailure(5, TimeSpan.FromSeconds(30), null);
+                sqlServerOptions.CommandTimeout(60);
                 sqlServerOptions.MigrationsAssembly("MovieShop.Infra");
             });
-
         });
 
         return services;

@@ -1,4 +1,3 @@
-using Microsoft.Extensions.Options;
 using MovieShop.Infra.Data;
 
 namespace MovieShop.MVC.Extensions;

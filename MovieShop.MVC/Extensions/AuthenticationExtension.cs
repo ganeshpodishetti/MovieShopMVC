@@ -6,9 +6,9 @@ namespace MovieShop.MVC.Extensions;
 
 public static class AuthenticationExtension
 {
-    public static void AddAuthentication(this WebApplicationBuilder builder)
+    public static void AddAuthentication(this IServiceCollection service)
     {
-        builder.Services.AddIdentity<User, Role>()
+        service.AddIdentity<User, Role>()
                .AddEntityFrameworkStores<MovieShopDbContext>()
                .AddDefaultTokenProviders();
     }

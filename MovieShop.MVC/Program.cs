@@ -1,15 +1,17 @@
 using MovieShop.Infra.Data;
-using MovieShop.MVC.Extensions;
+using OptionsExtension = MovieShop.MVC.Extensions.OptionsExtension;
+using ServiceExtension = MovieShop.MVC.Extensions.ServiceExtension;
+using AuthenticationExtension = MovieShop.MVC.Extensions.AuthenticationExtension;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.AddOptions();
+OptionsExtension.AddOptions(builder);
 builder.Services.AddDatabase();
-builder.AddAuthentication();
-builder.Services.AddServices();
+AuthenticationExtension.AddAuthentication(builder.Services);
+ServiceExtension.AddServices(builder.Services);
 
 var app = builder.Build();
 
