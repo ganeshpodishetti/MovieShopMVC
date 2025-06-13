@@ -24,6 +24,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles(); // Ensure static files middleware is explicitly added
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
