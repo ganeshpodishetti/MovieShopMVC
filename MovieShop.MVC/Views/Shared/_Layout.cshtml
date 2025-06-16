@@ -42,6 +42,50 @@
         body {
             font-family: 'Poppins', sans-serif;
         }
+
+        /* Dropdown menu enhancements */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            display: none;
+            min-width: 10rem;
+            padding: 0.5rem 0;
+            margin: 0.125rem 0 0;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            border-radius: 0.25rem;
+            z-index: 1000;
+        }
+
+        .dropdown.active .dropdown-menu {
+            display: block;
+        }
+
+        /* Add some extra space to prevent dropdown from closing instantly */
+        .dropdown-menu::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 0;
+            right: 0;
+            height: 10px;
+        }
+
+        /* Extra styling for dropdown items */
+        .dropdown-menu a {
+            display: block;
+            padding: 0.5rem 1rem;
+            clear: both;
+            font-weight: 400;
+            text-align: inherit;
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #f8f9fa;
+        }
     </style>
 </head>
 <body class="flex flex-col min-h-screen bg-gray-50">
@@ -58,10 +102,11 @@
                 <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="/" class="py-2 hover:text-secondary-light transition duration-300">Home</a>
-                    <a href="/Movies" class="py-2 hover:text-secondary-light transition duration-300">Movies</a>
+                    <a href="@Url.Action("AllMovies", "Movie")"
+                       class="py-2 hover:text-secondary-light transition duration-300">Movies</a>
 
                     <!-- Dropdown for Genres -->
-                    <div class="relative group">
+                    <div class="relative group dropdown">
                         <button class="flex items-center py-2 hover:text-secondary-light transition duration-300">
                             Genres
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" viewBox="0 0 20 20"
@@ -72,13 +117,24 @@
                             </svg>
                         </button>
                         <div
-                            class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10 hidden group-hover:block">
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Action</a>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Comedy</a>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Drama</a>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sci-Fi</a>
+                            class="dropdown-menu absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10 hidden transition-all duration-300 ease-in-out">
+                            <a href="@Url.Action("MoviesByGenre", "Movie", new { genre = "Action" })"
+                               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Action</a>
+                            <a href="@Url.Action("MoviesByGenre", "Movie", new { genre = "Comedy" })"
+                               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Comedy</a>
+                            <a href="@Url.Action("MoviesByGenre", "Movie", new { genre = "Drama" })"
+                               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Drama</a>
+                            <a href="@Url.Action("MoviesByGenre", "Movie", new { genre = "SciFi" })"
+                               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">SciFi</a>
+                            <a href="@Url.Action("MoviesByGenre", "Movie", new { genre = "Horror" })"
+                               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Horror</a>
+                            <a href="@Url.Action("MoviesByGenre", "Movie", new { genre = "Thriller" })"
+                               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Thriller</a>
+                            <a href="@Url.Action("MoviesByGenre", "Movie", new { genre = "Romance" })"
+                               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Romance</a>
                             <div class="border-t border-gray-100"></div>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">All Genres</a>
+                            <a href="@Url.Action("MoviesByGenre", "Movie")"
+                               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">All Genres</a>
                         </div>
                     </div>
                 </div>
@@ -137,11 +193,22 @@
                             </svg>
                         </button>
                         <div class="hidden mt-2 py-2 bg-primary-light rounded-md">
-                            <a href="#" class="block py-2 px-8 hover:bg-primary-light">Action</a>
-                            <a href="#" class="block py-2 px-8 hover:bg-primary-light">Comedy</a>
-                            <a href="#" class="block py-2 px-8 hover:bg-primary-light">Drama</a>
-                            <a href="#" class="block py-2 px-8 hover:bg-primary-light">Sci-Fi</a>
-                            <a href="#" class="block py-2 px-8 hover:bg-primary-light">All Genres</a>
+                            <a href="@Url.Action("MoviesByGenre", "Movie", new { genre = "Action" })"
+                               class="block py-2 px-8 hover:bg-primary-light">Action</a>
+                            <a href="@Url.Action("MoviesByGenre", "Movie", new { genre = "Comedy" })"
+                               class="block py-2 px-8 hover:bg-primary-light">Comedy</a>
+                            <a href="@Url.Action("MoviesByGenre", "Movie", new { genre = "Drama" })"
+                               class="block py-2 px-8 hover:bg-primary-light">Drama</a>
+                            <a href="@Url.Action("MoviesByGenre", "Movie", new { genre = "SciFi" })"
+                               class="block py-2 px-8 hover:bg-primary-light">SciFi</a>
+                            <a href="@Url.Action("MoviesByGenre", "Movie", new { genre = "Horror" })"
+                               class="block py-2 px-8 hover:bg-primary-light">Horror</a>
+                            <a href="@Url.Action("MoviesByGenre", "Movie", new { genre = "Thriller" })"
+                               class="block py-2 px-8 hover:bg-primary-light">Thriller</a>
+                            <a href="@Url.Action("MoviesByGenre", "Movie", new { genre = "Romance" })"
+                               class="block py-2 px-8 hover:bg-primary-light">Romance</a>
+                            <a href="@Url.Action("MoviesByGenre", "Movie")"
+                               class="block py-2 px-8 hover:bg-primary-light">All Genres</a>
                         </div>
                     </div>
 
@@ -178,7 +245,7 @@
 
 <footer class="bg-primary text-white mt-auto">
     <div class="container mx-auto px-4 py-8">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto text-center">
             <div>
                 <h5 class="text-xl font-semibold mb-4">Movie Shop</h5>
                 <p class="text-gray-300">Your one-stop destination for all the latest and greatest movies.</p>
@@ -186,7 +253,7 @@
             <div>
                 <h5 class="text-xl font-semibold mb-4">Connect With Us</h5>
                 <p class="text-gray-300 mb-4">Follow us on social media for updates and more.</p>
-                <div class="flex space-x-4">
+                <div class="flex justify-center space-x-4">
                     <a href="#" class="text-white hover:text-secondary transition duration-300">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
                             <path
@@ -238,6 +305,39 @@
                     }
                 }
             });
+        });
+
+        // Desktop dropdowns - click-based approach
+        const desktopDropdowns = document.querySelectorAll('.dropdown');
+
+        // Close any open dropdowns when clicking outside
+        document.addEventListener('click', function (e) {
+            desktopDropdowns.forEach(dropdown => {
+                if (!dropdown.contains(e.target)) {
+                    dropdown.classList.remove('active');
+                }
+            });
+        });
+
+        // Toggle dropdown on click
+        desktopDropdowns.forEach(dropdown => {
+            const button = dropdown.querySelector('button');
+            if (button) {
+                button.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    // Close all other dropdowns
+                    desktopDropdowns.forEach(otherDropdown => {
+                        if (otherDropdown !== dropdown) {
+                            otherDropdown.classList.remove('active');
+                        }
+                    });
+
+                    // Toggle current dropdown
+                    dropdown.classList.toggle('active');
+                });
+            }
         });
     });
 </script>
