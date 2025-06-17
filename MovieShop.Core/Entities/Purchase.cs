@@ -10,6 +10,6 @@ public class Purchase
     public decimal TotalPrice { get; set; }
 
     // Navigation Properties
-    public Movie Movie { get; set; }
-    public User User { get; set; }
+    public Movie Movie { get; set; } = null!;
+    public User User { get; set; } = null!;
 }
