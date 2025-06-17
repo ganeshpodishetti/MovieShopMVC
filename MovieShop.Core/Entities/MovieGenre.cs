@@ -6,6 +6,6 @@ public class MovieGenre
     public int GenreId { get; set; }
 
     // Navigation Properties
-    public Movie Movie { get; set; }
-    public Genre Genre { get; set; }
+    public Movie Movie { get; set; } = null!;
+    public Genre Genre { get; set; } = null!;
 }

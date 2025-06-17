@@ -6,6 +6,6 @@ public class Favorite
     public int MovieId { get; set; }
 
     // Navigation Properties
-    public User User { get; set; }
-    public Movie Movie { get; set; }
+    public User User { get; set; } = null!;
+    public Movie Movie { get; set; } = null!;
 }
