@@ -11,7 +11,7 @@ permissions:
   actions: write
 
 env:
-  AZURE_WEBAPP_NAME: 'movie-shop-webapp'
+  AZURE_WEBAPP_NAME: 'movieshopmvc'
   AZURE_WEBAPP_PACKAGE_PATH: './publish'
   DOTNET_VERSION: '9.x'
   SOLUTION_FILE: 'MovieShop.sln'
