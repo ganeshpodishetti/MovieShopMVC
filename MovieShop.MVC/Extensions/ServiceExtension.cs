@@ -11,6 +11,8 @@ public static class ServiceExtension
     {
         services.AddScoped<IMovieService, MovieService>();
         services.AddScoped<IMovieRepository, MovieRepository>();
+        services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IFavoriteService, FavoriteService>();
         return services;
     }
 }

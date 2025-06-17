@@ -157,9 +157,32 @@
 
                 <!-- User Menu & Login -->
                 <div class="hidden md:flex items-center space-x-4">
-                    <a href="#" class="hover:text-secondary-light transition duration-300">Login</a>
-                    <a href="#"
-                       class="bg-secondary hover:bg-secondary-light px-4 py-2 rounded-md transition duration-300">Register</a>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a asp-controller="Favorite" asp-action="Index" class="hover:text-secondary-light transition duration-300 mr-4">
+                            <span class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                </svg>
+                                My Favorites
+                            </span>
+                        </a>
+                        <form asp-controller="Account" asp-action="Logout" method="post" class="inline">
+                            <button type="submit" class="hover:text-secondary-light transition duration-300">Logout
+                            </button>
+                        </form>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a asp-controller="Account" asp-action="Register"
+                               class="bg-secondary hover:bg-secondary-light px-4 py-2 rounded-md transition duration-300">Register
+                                Admin</a>
+                        }
+                    }
+                    else
+                    {
+                        <a asp-controller="Account" asp-action="Login"
+                           class="hover:text-secondary-light transition duration-300">Login</a>
+                    }
                 </div>
 
                 <!-- Mobile menu button -->
@@ -230,8 +253,24 @@
 
                     <!-- Mobile Auth Links -->
                     <div class="flex space-x-2 px-4 pt-2">
-                        <a href="#" class="flex-1 text-center py-2 hover:bg-primary-light rounded-md">Login</a>
-                        <a href="#" class="flex-1 text-center bg-secondary hover:bg-secondary-light py-2 rounded-md">Register</a>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <form asp-controller="Account" asp-action="Logout" method="post" class="flex-1">
+                                <button type="submit" class="w-full text-center py-2 hover:bg-primary-light rounded-md">
+                                    Logout
+                                </button>
+                            </form>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <a asp-controller="Account" asp-action="Register"
+                                   class="flex-1 text-center bg-secondary hover:bg-secondary-light py-2 rounded-md">Register</a>
+                            }
+                        }
+                        else
+                        {
+                            <a asp-controller="Account" asp-action="Login"
+                               class="flex-1 text-center py-2 hover:bg-primary-light rounded-md">Login</a>
+                        }
                     </div>
                 </div>
             </div>

@@ -1,0 +1,50 @@
+@{
+    ViewData["Title"] = "Admin Login";
+}
+
+<div class="container mx-auto px-4 py-8">
+    <div class="max-w-md mx-auto bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="bg-primary text-white p-4">
+            <h2 class="text-xl font-bold">Admin Login</h2>
+            <p class="text-sm opacity-80">Only administrators can access this area</p>
+        </div>
+
+        <div class="p-6">
+            <form asp-action="Login" method="post">
+                <div class="text-red-500 mb-4">
+                    @Html.ValidationSummary(false, "", new { @class = "text-red-500 text-sm" })
+                </div>
+
+                <div class="mb-4">
+                    <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
+                    <input type="email" id="email" name="email"
+                           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                           placeholder="Enter your email"/>
+                </div>
+
+                <div class="mb-4">
+                    <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+                    <input type="password" id="password" name="password"
+                           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                           placeholder="Enter your password"/>
+                </div>
+
+                <div class="mb-6 flex items-center">
+                    <input type="checkbox" id="rememberMe" name="rememberMe" class="mr-2"/>
+                    <label for="rememberMe" class="text-gray-700 text-sm">Remember me</label>
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <button type="submit"
+                            class="bg-secondary hover:bg-secondary-light text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300">
+                        Login
+                    </button>
+                    <a href="@Url.Action("SetupFirstAdmin", "Account")"
+                       class="inline-block align-baseline font-bold text-sm text-secondary hover:text-secondary-light">
+                        First Time Setup
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
