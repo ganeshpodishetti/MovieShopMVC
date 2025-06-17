@@ -1,0 +1,17 @@
+@{
+    ViewData["Title"] = "Access Denied";
+}
+
+<div class="container mx-auto px-4 py-16 text-center">
+    <div class="bg-red-50 border-l-4 border-red-500 p-8 rounded-lg shadow-md mx-auto max-w-lg">
+        <h1 class="text-3xl font-bold text-red-600 mb-4">Access Denied</h1>
+        <div class="text-gray-700 mb-6">
+            <p class="mb-2">You do not have permission to access this resource.</p>
+            <p>Only administrators are allowed to access this area.</p>
+        </div>
+        <a href="@Url.Action("Index", "Home")"
+           class="inline-block bg-primary hover:bg-primary-light text-white font-bold py-2 px-6 rounded transition duration-300">
+            Return to Home
+        </a>
+    </div>
+</div>

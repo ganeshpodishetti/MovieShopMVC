@@ -1,0 +1,56 @@
+@model IEnumerable<MovieCardDto>
+
+@{
+    ViewData["Title"] = "My Favorite Movies";
+}
+
+<div class="container mx-auto px-4 py-8">
+    <div class="flex justify-between items-center mb-8">
+        <h1 class="text-3xl font-bold text-primary">My Favorite Movies</h1>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-4">
+            <p class="text-blue-700">You haven't added any favorite movies yet.</p>
+        </div>
+    }
+    else
+    {
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+            @foreach (var movie in Model)
+            {
+                <div
+                    class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1 flex flex-col h-full relative group">
+                    <a href="@Url.Action("Details", "Movie", new { id = movie.Id })" class="block">
+                        <div class="relative overflow-hidden">
+                            <img
+                                src="@(string.IsNullOrEmpty(movie.PosterURL) ? "/images/default-movie.png" : movie.PosterURL)"
+                                alt="@movie.Title"
+                                class="w-full h-auto object-cover transition duration-300 hover:scale-105">
+                        </div>
+                        <div class="p-4 flex flex-col flex-grow">
+                            <h3 class="font-semibold text-gray-800 mb-2 line-clamp-1">@movie.Title</h3>
+                        </div>
+                    </a>
+
+                    <!-- Remove favorite button - visible on hover -->
+                    <form asp-action="Remove" asp-controller="Favorite" method="post"
+                          class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="favoriteId" value="@movie.FavoriteId"/>
+                        <button type="submit"
+                                class="bg-red-500 hover:bg-red-600 text-white rounded-full p-2 shadow-md transition-colors duration-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                 fill="currentColor">
+                                <path fill-rule="evenodd"
+                                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                      clip-rule="evenodd"/>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+            }
+        </div>
+    }
+</div>
