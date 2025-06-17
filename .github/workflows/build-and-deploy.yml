@@ -6,6 +6,10 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+  actions: write
+
 env:
   AZURE_WEBAPP_NAME: 'movie-shop-webapp'
   AZURE_WEBAPP_PACKAGE_PATH: './publish'
