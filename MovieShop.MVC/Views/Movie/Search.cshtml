@@ -1,0 +1,84 @@
+@model IEnumerable<MovieCardDto>
+
+@{
+    ViewData["Title"] = "Search Results";
+    var searchTerm = ViewBag.SearchTerm ?? "";
+    var currentPage = ViewBag.CurrentPage ?? 1;
+    var totalPages = ViewBag.TotalPages ?? 1;
+}
+
+<section id="search-results" class="container mx-auto px-4 py-16">
+    <h2 class="text-3xl font-bold mb-8 text-primary relative inline-block">
+        Search Results for "@searchTerm"
+        <span class="absolute bottom-0 left-0 w-1/2 h-1 bg-secondary"></span>
+    </h2>
+
+    @if (Model.Any())
+    {
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+            @foreach (var movie in Model)
+            {
+                <div
+                    class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1 flex flex-col h-full">
+                    <a href="@Url.Action("Details", "Movie", new { id = movie.Id })" class="block">
+                        <div class="relative overflow-hidden">
+                            <img
+                                src="@(string.IsNullOrEmpty(movie.PosterURL) ? "/images/default-movie.png" : movie.PosterURL)"
+                                alt="@movie.Title"
+                                class="w-full h-auto object-cover transition duration-300 hover:scale-105">
+                        </div>
+                        <div class="p-4 flex flex-col flex-grow">
+                            <h3 class="font-semibold text-gray-800 mb-2 line-clamp-1">@movie.Title</h3>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+
+        <!-- Pagination -->
+        <div class="flex justify-center mt-10">
+            <nav class="inline-flex rounded-md shadow">
+                @if (currentPage > 1)
+                {
+                    <a href="@Url.Action("Search", new { searchTerm, page = currentPage - 1 })"
+                       class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50">
+                        Previous
+                    </a>
+                }
+                else
+                {
+                    <span
+                        class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-300 bg-white border border-gray-300 rounded-l-md cursor-not-allowed">
+                        Previous
+                    </span>
+                }
+
+                <span
+                    class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-primary-light bg-primary-50 border border-gray-300">
+                    Page @currentPage of @totalPages
+                </span>
+
+                @if (currentPage < totalPages)
+                {
+                    <a href="@Url.Action("Search", new { searchTerm, page = currentPage + 1 })"
+                       class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-r-md hover:bg-gray-50">
+                        Next
+                    </a>
+                }
+                else
+                {
+                    <span
+                        class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-300 bg-white border border-gray-300 rounded-r-md cursor-not-allowed">
+                        Next
+                    </span>
+                }
+            </nav>
+        </div>
+    }
+    else
+    {
+        <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-4">
+            <p class="text-blue-700">No movies found matching your search term. Please try a different search.</p>
+        </div>
+    }
+</section>

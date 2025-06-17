@@ -93,4 +93,8 @@
         <Folder Include="wwwroot\images\"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <Content Include=".github\workflows\build-and-deploy.yml"/>
+    </ItemGroup>
+
 </Project>
