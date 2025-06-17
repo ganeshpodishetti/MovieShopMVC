@@ -141,4 +141,50 @@ public class MovieService(IMovieRepository repository) : IMovieService
 
         return movieDetails;
     }
+
+    public async Task<IEnumerable<MovieCardDto>> SearchMoviesAsync(string searchTerm, int pageNumber = 1,
+        int pageSize = 10)
+    {
+        if (string.IsNullOrWhiteSpace(searchTerm))
+            return [];
+
+        var movies = await repository.GetAllAsync();
+
+        var filteredMovies = movies
+                             .Where(m =>
+                                 m.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                                 (!string.IsNullOrEmpty(m.Overview) &&
+                                  m.Overview.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)) ||
+                                 (!string.IsNullOrEmpty(m.Tagline) &&
+                                  m.Tagline.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)))
+                             .Skip((pageNumber - 1) * pageSize)
+                             .Take(pageSize)
+                             .Select(movie => new MovieCardDto
+                             {
+                                 Id = movie.Id,
+                                 PosterURL = movie.PosterUrl!,
+                                 Title = movie.Title
+                             })
+                             .ToList();
+
+        return filteredMovies;
+    }
+
+    public async Task<int> GetSearchMoviesCountAsync(string searchTerm)
+    {
+        if (string.IsNullOrWhiteSpace(searchTerm))
+            return 0;
+
+        var movies = await repository.GetAllAsync();
+
+        var count = movies
+            .Count(m =>
+                m.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                (!string.IsNullOrEmpty(m.Overview) &&
+                 m.Overview.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)) ||
+                (!string.IsNullOrEmpty(m.Tagline) &&
+                 m.Tagline.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)));
+
+        return count;
+    }
 }

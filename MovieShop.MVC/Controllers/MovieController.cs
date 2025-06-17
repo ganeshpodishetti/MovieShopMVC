@@ -47,4 +47,20 @@ public class MovieController(IMovieService movieService) : Controller
 
         return View(movieDetails);
     }
+
+    public async Task<IActionResult> Search(string searchTerm, int page = 1)
+    {
+        // Ensure page is at least 1
+        if (page < 1) page = 1;
+
+        ViewBag.SearchTerm = searchTerm;
+        ViewBag.CurrentPage = page;
+
+        // Get total count for pagination
+        var totalMovies = await movieService.GetSearchMoviesCountAsync(searchTerm);
+        ViewBag.TotalPages = (int)Math.Ceiling(totalMovies / (double)PageSize);
+
+        var movies = await movieService.SearchMoviesAsync(searchTerm, page);
+        return View(movies);
+    }
 }

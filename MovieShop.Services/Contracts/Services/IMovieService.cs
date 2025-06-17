@@ -12,4 +12,6 @@ public interface IMovieService : IRepository<Movie>
     Task<int> GetMoviesCountAsync();
     Task<int> GetMoviesByGenreCountAsync(string genre);
     Task<MovieDetailsDto> GetMovieDetailsAsync(int id);
+    Task<IEnumerable<MovieCardDto>> SearchMoviesAsync(string searchTerm, int pageNumber = 1, int pageSize = 10);
+    Task<int> GetSearchMoviesCountAsync(string searchTerm);
 }
